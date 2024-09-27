@@ -1,2 +1,2 @@
-# timpietyper-core
+# timpietyper-ap
 The API for timpietyper
