@@ -1,0 +1,6 @@
+@TimpieTyper.Api_HostAddress = http://localhost:5278
+
+GET {{TimpieTyper.Api_HostAddress}}/words/
+Accept: application/json
+
+###

@@ -1,6 +1,0 @@
-@TimpieTyper.Web_HostAddress = http://localhost:5278
-
-GET {{TimpieTyper.Web_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

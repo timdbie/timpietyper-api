@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimpieTyper.Web", "TimpieTyper.Web\TimpieTyper.Web.csproj", "{9D95EBFB-5B00-4689-8D75-3EF24BAE4679}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimpieTyper.Api", "TimpieTyper.Api\TimpieTyper.Api.csproj", "{9D95EBFB-5B00-4689-8D75-3EF24BAE4679}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
