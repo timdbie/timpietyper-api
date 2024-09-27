@@ -16,29 +16,24 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+var words = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    "at", "home", "can", "those", "keep", "what", "part", "up", "move", "change"
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/words", () =>
     {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
+        var random = new Random();
+        
+        var shuffledWords = words.OrderBy(_ => random.Next()).ToList();
+        
+        var randomWords = Enumerable.Range(0, 50)
+            .Select(i => shuffledWords[i % shuffledWords.Count])
+            .ToList();
+
+        return randomWords;
     })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
+.WithName("GetRandomWords")
+.WithOpenApi();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TimpieTyper.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85142f28b4d745fe9c6330499f3a80255628972a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4302062f9b85d2778187fcc5060b170b51dc814")]
 [assembly: System.Reflection.AssemblyProductAttribute("TimpieTyper.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TimpieTyper.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
