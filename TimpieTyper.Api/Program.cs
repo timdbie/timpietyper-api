@@ -1,13 +1,20 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin() 
+            .AllowAnyMethod()  
+            .AllowAnyHeader(); 
+    });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -15,6 +22,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAllOrigins");
 
 var words = new[]
 {
@@ -24,16 +33,16 @@ var words = new[]
 app.MapGet("/words", () =>
     {
         var random = new Random();
-        
+    
         var shuffledWords = words.OrderBy(_ => random.Next()).ToList();
         
-        var randomWords = Enumerable.Range(0, 50)
+        var randomWords = Enumerable.Range(0, 80)
             .Select(i => shuffledWords[i % shuffledWords.Count])
             .ToList();
 
         return randomWords;
     })
-.WithName("GetRandomWords")
-.WithOpenApi();
+    .WithName("GetRandomWords")
+    .WithOpenApi();
 
 app.Run();
