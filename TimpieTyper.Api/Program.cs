@@ -1,5 +1,7 @@
-using TimpieTyper.Persistence;
+using TimpieTyper.Core.Interfaces;
+using TimpieTyper.Core.Services;
 using TimpieTyper.Persistence.Context;
+using TimpieTyper.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,10 @@ builder.Services.AddSwaggerGen();
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 if (connString == null) throw new ArgumentNullException($"Connection string is null");
 builder.Services.AddScoped<AppDbContext>(_ => new AppDbContext(connString));
+
+builder.Services.AddScoped<IWordRepository, WordRepository>();
+
+builder.Services.AddScoped<WordService>();
 
 builder.Services.AddCors(options =>
 {

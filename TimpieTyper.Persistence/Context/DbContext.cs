@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TimpieTyper.Core.Entities;
 
 namespace TimpieTyper.Persistence.Context;
 
@@ -10,6 +11,8 @@ public class AppDbContext : DbContext
     {
         _connectionString = connectionString;
     }
+    
+    public DbSet<Word> Words { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
