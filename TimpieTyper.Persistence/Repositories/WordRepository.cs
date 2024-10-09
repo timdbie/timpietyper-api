@@ -14,7 +14,7 @@ public class WordRepository : IWordRepository
         _context = context;
     }
 
-    public async Task<List<Word>> GetWordsAsync(int count)
+    public async Task<List<Word>> GetAsync(int count)
     {
         return await _context.Words
             .OrderBy(w => Guid.NewGuid())

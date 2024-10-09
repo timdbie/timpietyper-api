@@ -14,15 +14,10 @@ public class WordController : ControllerBase
         _wordService = wordService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetRandomWords([FromQuery] int count = 10)
+    [HttpGet("{count:int}")]
+    public async Task<IActionResult> GetAsync(int count = 10)
     {
-        var words = await _wordService.GetWordsAsync(count);
-        
-        if (words.Count == 0)
-        {
-            return NotFound("No words available in the database.");
-        }
+        var words = await _wordService.GetAsync(count);
         
         return Ok(words);
     }

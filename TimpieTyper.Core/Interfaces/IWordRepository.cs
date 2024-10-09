@@ -4,5 +4,5 @@ namespace TimpieTyper.Core.Interfaces;
 
 public interface IWordRepository
 {
-    Task<List<Word>> GetWordsAsync(int count);
+    Task<List<Word>> GetAsync(int count);
 }

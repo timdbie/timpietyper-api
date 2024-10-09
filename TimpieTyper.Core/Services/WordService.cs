@@ -12,8 +12,8 @@ public class WordService
         _wordRepository = wordRepository;
     }
 
-    public async Task<List<Word>> GetWordsAsync(int count)
+    public async Task<List<Word>> GetAsync(int count)
     {
-        return await _wordRepository.GetWordsAsync(count);
+        return await _wordRepository.GetAsync(count);
     }
 }
