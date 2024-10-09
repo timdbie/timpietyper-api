@@ -1,6 +1,6 @@
 namespace TimpieTyper.Core.Interfaces;
 
-public interface ITempService
+public interface IWordRepository
 {
     
 }

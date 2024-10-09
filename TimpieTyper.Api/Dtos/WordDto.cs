@@ -1,6 +1,6 @@
 namespace TimpieTyper.Api.Dtos;
 
-public class TempDto
+public class WordDto
 {
     
 }

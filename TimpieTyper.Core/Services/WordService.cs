@@ -1,6 +1,6 @@
 namespace TimpieTyper.Core.Services;
 
-public class TempService
+public class WordService
 {
     
 }

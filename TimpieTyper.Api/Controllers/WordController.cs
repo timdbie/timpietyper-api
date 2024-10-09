@@ -1,6 +1,6 @@
 namespace TimpieTyper.Api.Controllers;
 
-public class TempController
+public class WordController
 {
     
 }

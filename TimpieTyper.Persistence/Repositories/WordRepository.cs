@@ -1,6 +1,6 @@
 namespace TimpieTyper.Persistence.Repositories;
 
-public class TempRepository
+public class WordRepository
 {
     
 }
