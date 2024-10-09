@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TimpieTyper.Core\TimpieTyper.Core.csproj" />
+      <ProjectReference Include="..\TimpieTyper.Persistence\TimpieTyper.Persistence.csproj" />
     </ItemGroup>
 
 </Project>
