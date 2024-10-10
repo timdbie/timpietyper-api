@@ -14,11 +14,15 @@ public class WordRepository : IWordRepository
         _context = context;
     }
 
-    public async Task<List<Word>> GetAsync(int count)
+    public Word Get()
     {
-        return await _context.Words
-            .OrderBy(w => Guid.NewGuid())
+        return _context.Words.FirstOrDefault();
+    }
+
+    public List<Word> GetByCount(int count)
+    {
+        return _context.Words
             .Take(count)
-            .ToListAsync();
+            .ToList();
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TimpieTyper.Api.Dtos;
 using TimpieTyper.Core.Services;
 
 namespace TimpieTyper.Api.Controllers;
@@ -14,11 +15,19 @@ public class WordController : ControllerBase
         _wordService = wordService;
     }
 
-    [HttpGet("{count:int}")]
-    public async Task<IActionResult> GetAsync(int count = 10)
+    [HttpGet]
+    public IActionResult Get()
     {
-        var words = await _wordService.GetAsync(count);
+        var word = _wordService.Get();
         
-        return Ok(words);
+        return Ok(WordDto.FromEntity(word));
+    }
+    
+    [HttpGet("{count:int}")]
+    public IActionResult Get(int count)
+    {
+        var words = _wordService.GetByCount(count);
+        
+        return Ok(words.Select(WordDto.FromEntity));
     }
 }
