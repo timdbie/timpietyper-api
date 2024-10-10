@@ -4,8 +4,8 @@ namespace TimpieTyper.Api.Dtos;
 
 public class WordDto
 {
-    public required int Id { get; set; }
-    public required string Value { get; set; }
+    public int Id { get; set; }
+    public string Value { get; set; }
 
     public static WordDto FromEntity (Word word)
     {

@@ -14,15 +14,20 @@ public class WordRepository : IWordRepository
         _context = context;
     }
 
-    public Word Get()
+    public List<Word> GetAll()
     {
-        return _context.Words.FirstOrDefault();
+        return _context.Words.ToList();
     }
 
-    public List<Word> GetByCount(int count)
+    public Word GetById(int id)
     {
-        return _context.Words
-            .Take(count)
-            .ToList();
+        return _context.Words.FirstOrDefault(word => word.Id == id);
+    }
+
+    public Word Create(Word word)
+    {
+        _context.Words.Add(word);
+        _context.SaveChanges();
+        return word;
     }
 }

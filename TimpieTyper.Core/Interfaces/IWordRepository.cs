@@ -4,6 +4,7 @@ namespace TimpieTyper.Core.Interfaces;
 
 public interface IWordRepository
 {
-    Word Get();
-    List<Word> GetByCount(int count);
+    List<Word> GetAll();
+    Word GetById(int id);
+    Word Create(Word word);
 }

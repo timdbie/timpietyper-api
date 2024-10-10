@@ -12,13 +12,18 @@ public class WordService
         _wordRepository = wordRepository;
     }
 
-    public Word Get()
+    public List<Word> GetAll()
     {
-        return _wordRepository.Get();
+        return _wordRepository.GetAll();
     }
 
-    public List<Word> GetByCount(int count)
+    public Word GetById(int id)
     {
-        return _wordRepository.GetByCount(count);
+        return _wordRepository.GetById(id);
+    }
+
+    public Word Create(Word word)
+    {
+        return _wordRepository.Create(word);
     }
 }

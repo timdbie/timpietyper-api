@@ -18,16 +18,26 @@ public class WordController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        var word = _wordService.Get();
-        
-        return Ok(WordDto.FromEntity(word));
-    }
-    
-    [HttpGet("{count:int}")]
-    public IActionResult Get(int count)
-    {
-        var words = _wordService.GetByCount(count);
+        var words = _wordService.GetAll();
         
         return Ok(words.Select(WordDto.FromEntity));
+    }
+    
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var word = _wordService.GetById(id);
+    
+        return Ok(WordDto.FromEntity(word));
+    }
+
+    [HttpPost]
+    public IActionResult Post(CreateWordDto createWordDto)
+    {
+        var word = createWordDto.ToEntity();
+        
+        var createdWord = _wordService.Create(word);
+        
+        return CreatedAtAction(nameof(GetById), new { id = createdWord.Id }, createdWord);
     }
 }
