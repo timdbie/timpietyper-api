@@ -13,7 +13,7 @@ public class AppDbContext : DbContext
     }
     
     public DbSet<Word> Words { get; set; }
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -21,4 +21,10 @@ public class AppDbContext : DbContext
             optionsBuilder.UseSqlServer(_connectionString);
         }
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Word>().ToTable("Words");
+    }
+
 }
