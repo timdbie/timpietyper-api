@@ -20,7 +20,9 @@ public class WordController : ControllerBase
     {
         var words = _wordService.GetAll();
         
-        return Ok(words.Select(WordDto.FromEntity));
+        var values = words.Select(word => word.Value).ToList();
+        
+        return Ok(values);
     }
     
     [HttpGet("{id}")]
