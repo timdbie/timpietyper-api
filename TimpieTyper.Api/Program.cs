@@ -1,7 +1,21 @@
+using TimpieTyper.Core.Interfaces;
+using TimpieTyper.Core.Services;
+using TimpieTyper.Persistence.Context;
+using TimpieTyper.Persistence.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (connString == null) throw new ArgumentNullException($"Connection string is null");
+builder.Services.AddScoped<AppDbContext>(_ => new AppDbContext(connString));
+
+builder.Services.AddScoped<IWordRepository, WordRepository>();
+
+builder.Services.AddScoped<WordService>();
 
 builder.Services.AddCors(options =>
 {
@@ -25,24 +39,6 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowAllOrigins");
 
-var words = new[]
-{
-    "at", "home", "can", "those", "keep", "what", "part", "up", "move", "change"
-};
-
-app.MapGet("/words", () =>
-    {
-        var random = new Random();
-    
-        var shuffledWords = words.OrderBy(_ => random.Next()).ToList();
-        
-        var randomWords = Enumerable.Range(0, 80)
-            .Select(i => shuffledWords[i % shuffledWords.Count])
-            .ToList();
-
-        return randomWords;
-    })
-    .WithName("GetRandomWords")
-    .WithOpenApi();
+app.MapControllers();
 
 app.Run();
