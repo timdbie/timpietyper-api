@@ -23,7 +23,7 @@ public class WordController : ControllerBase
         return Ok(WordsDto.FromEntity(words));
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public IActionResult GetById(int id)
     {
         var word = _wordService.GetById(id);
@@ -31,6 +31,14 @@ public class WordController : ControllerBase
         return Ok(WordsDto.FromEntity(word));
     }
 
+    [HttpGet("random")]
+    public IActionResult GetRandom([FromQuery]int count = 50)
+    {
+        var words = _wordService.GetRandom(count);
+
+        return Ok(WordsDto.FromEntity(words));
+    }
+    
     [HttpPost]
     public IActionResult Post(CreateWordDto createWordDto)
     {
@@ -40,6 +48,6 @@ public class WordController : ControllerBase
         
         var wordsDto = WordsDto.FromEntity(createdWord);
         
-        return CreatedAtAction(nameof(GetById), new { id = createdWord.Id }, wordsDto);
+        return CreatedAtAction(nameof(Get), new { id = createdWord.Id }, wordsDto);
     }
 }

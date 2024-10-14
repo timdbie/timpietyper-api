@@ -24,6 +24,27 @@ public class WordRepository : IWordRepository
         return _context.Words.FirstOrDefault(word => word.Id == id);
     }
 
+    public List<Word> GetRandom(int count)
+    {
+        var maxId = _context.Words.Max(w => w.Id);
+        var randomWords = new List<Word>();
+        var random = new Random();
+
+        while (randomWords.Count < count)
+        {
+            var randomId = random.Next(1, maxId + 1);
+            
+            var randomWord = _context.Words.Find(randomId);
+        
+            if (randomWord != null)
+            {
+                randomWords.Add(randomWord);
+            }
+        }
+
+        return randomWords;
+    }
+
     public Word Create(Word word)
     {
         _context.Words.Add(word);

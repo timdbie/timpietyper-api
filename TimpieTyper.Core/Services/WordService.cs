@@ -22,6 +22,11 @@ public class WordService
         return _wordRepository.GetById(id);
     }
 
+    public List<Word> GetRandom(int count)
+    {
+        return _wordRepository.GetRandom(count);
+    }
+
     public Word Create(Word word)
     {
         return _wordRepository.Create(word);
