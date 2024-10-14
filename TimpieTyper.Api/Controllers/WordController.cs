@@ -20,9 +20,7 @@ public class WordController : ControllerBase
     {
         var words = _wordService.GetAll();
         
-        var values = words.Select(word => word.Value).ToList();
-        
-        return Ok(values);
+        return Ok(WordsDto.FromEntity(words));
     }
     
     [HttpGet("{id}")]
@@ -30,7 +28,7 @@ public class WordController : ControllerBase
     {
         var word = _wordService.GetById(id);
     
-        return Ok(WordDto.FromEntity(word));
+        return Ok(WordsDto.FromEntity(word));
     }
 
     [HttpPost]
@@ -40,6 +38,8 @@ public class WordController : ControllerBase
         
         var createdWord = _wordService.Create(word);
         
-        return CreatedAtAction(nameof(GetById), new { id = createdWord.Id }, createdWord);
+        var wordsDto = WordsDto.FromEntity(createdWord);
+        
+        return CreatedAtAction(nameof(GetById), new { id = createdWord.Id }, wordsDto);
     }
 }
