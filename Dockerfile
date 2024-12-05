@@ -12,6 +12,5 @@ COPY TimpieTyper.Core/. ./TimpieTyper.Core/
 COPY TimpieTyper.Persistence/. ./TimpieTyper.Persistence/ 
 
 WORKDIR /app/TimpieTyper.Api 
-ENV ASPNETCORE_URLS=5278
 
 ENTRYPOINT ["dotnet", "watch", "run", "--urls", "http://+:5278"]
