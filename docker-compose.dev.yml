@@ -1,0 +1,13 @@
+services:
+  dev:
+    container_name: timpietyper-api
+    image: timpietyper-api
+    build:
+      context: .
+    ports:
+      - "5278:5278"
+    volumes:
+      - .:/app 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
