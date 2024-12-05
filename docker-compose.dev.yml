@@ -10,3 +10,16 @@ services:
       - .:/app 
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+  db:
+    container_name: timpietyper-db
+    image: mysql:8
+    ports:
+      - "5371:3306"
+    environment:
+      - MYSQL_DATABASE=db_timpietyper
+      - MYSQL_ROOT_PASSWORD=123 
+    volumes:
+      - timpietyper_data:/var/lib/mysql 
+
+volumes:
+  timpietyper_data:
