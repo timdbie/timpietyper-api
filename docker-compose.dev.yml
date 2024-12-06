@@ -18,7 +18,6 @@ services:
     environment:
       - MYSQL_DATABASE=db_timpietyper
       - MYSQL_ROOT_PASSWORD=123 
-      -
     volumes:
       - timpietyper_data:/var/lib/mysql 
 
