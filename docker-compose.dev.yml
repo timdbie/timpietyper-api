@@ -1,6 +1,6 @@
 services:
   dev:
-    container_name: timpietyper-api
+    container_name: timpietyper-api-dev
     image: timpietyper-api
     build:
       context: .
@@ -10,6 +10,9 @@ services:
       - .:/app 
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - timpietyper_default
+
   db:
     container_name: timpietyper-db
     image: mysql:8
@@ -20,6 +23,12 @@ services:
       - MYSQL_ROOT_PASSWORD=123 
     volumes:
       - timpietyper_data:/var/lib/mysql 
+    networks:
+      - timpietyper_default
 
 volumes:
   timpietyper_data:
+
+networks:
+  timpietyper_default:
+    external: true
