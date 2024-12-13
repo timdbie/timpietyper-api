@@ -1,0 +1,15 @@
+name: Testing
+
+on:
+  push:
+  workflow_dispatch:
+  
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: Unit tests
+        run: make test
