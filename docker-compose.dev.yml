@@ -1,0 +1,29 @@
+services:
+  dev:
+    image: timpietyper-api
+    container_name: timpietyper-api-dev
+    build:
+      context: .
+      target: development
+    ports:
+      - "5278:5278"
+    volumes:
+      - .:/app 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - timpietyper_default
+  
+  test:
+    image: timpietyper-api-test
+    container_name: timpietyper-api-test
+    build:
+      context: .
+      target: testing 
+    command: ["dotnet", "test", "--no-restore", "--verbosity", "normal"]
+    networks:
+      - timpietyper_default
+
+networks:
+  timpietyper_default:
+    external: true
