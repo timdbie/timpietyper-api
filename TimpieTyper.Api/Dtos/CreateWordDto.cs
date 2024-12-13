@@ -1,18 +1,14 @@
-using System.ComponentModel.DataAnnotations;
-using TimpieTyper.Core.Entities;
+using TimpieTyper.Core.Domain;
 
-namespace TimpieTyper.Api.Dtos;
-
-public class CreateWordDto
+namespace TimpieTyper.Api.Dtos
 {
-    [Required]
-    public string Value { get; set; }
-    
-    public Word ToEntity()
+    public class CreateWordDto
     {
-        return new Word()
+        public required string Value { get; set; }
+
+        public static Word ToWord(CreateWordDto word)
         {
-            Value = this.Value
-        };
+            return new Word(word.Value);
+        }
     }
 }

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TimpieTyper.Core.Entities;
+using TimpieTyper.Persistence.Entities;
 
 namespace TimpieTyper.Persistence.Context;
 
@@ -12,7 +12,7 @@ public class AppDbContext : DbContext
         _connectionString = connectionString;
     }
     
-    public DbSet<Word> Words { get; set; }
+    public DbSet<WordEntity> Words { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -24,7 +24,9 @@ public class AppDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Word>().ToTable("Words");
+        modelBuilder.Entity<WordEntity>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
     }
 
 }

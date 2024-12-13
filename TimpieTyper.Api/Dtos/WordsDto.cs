@@ -1,4 +1,4 @@
-using TimpieTyper.Core.Entities;
+using TimpieTyper.Core.Domain;
 
 namespace TimpieTyper.Api.Dtos;
 

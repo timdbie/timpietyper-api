@@ -1,54 +1,58 @@
-using Microsoft.EntityFrameworkCore;
 using TimpieTyper.Core.Interfaces;
-using TimpieTyper.Core.Entities;
+using TimpieTyper.Core.Domain;
 using TimpieTyper.Persistence.Context;
+using TimpieTyper.Persistence.Entities;
 
-namespace TimpieTyper.Persistence.Repositories;
-
-public class WordRepository : IWordRepository
+namespace TimpieTyper.Persistence.Repositories
 {
-    private readonly AppDbContext _context;
-
-    public WordRepository(AppDbContext context)
+    public class WordRepository : IWordRepository
     {
-        _context = context;
-    }
+        private readonly AppDbContext _context;
 
-    public List<Word> GetAll()
-    {
-        return _context.Words.ToList();
-    }
-
-    public Word GetById(int id)
-    {
-        return _context.Words.FirstOrDefault(word => word.Id == id);
-    }
-
-    public List<Word> GetRandom(int count)
-    {
-        var maxId = _context.Words.Max(w => w.Id);
-        var randomWords = new List<Word>();
-        var random = new Random();
-
-        while (randomWords.Count < count)
+        public WordRepository(AppDbContext context)
         {
-            var randomId = random.Next(1, maxId + 1);
-            
-            var randomWord = _context.Words.Find(randomId);
-        
-            if (randomWord != null)
-            {
-                randomWords.Add(randomWord);
-            }
+            _context = context;
         }
 
-        return randomWords;
-    }
+        public List<Word> GetAll()
+        {
+            return _context.Words
+                .Select(WordEntity.ToWord)
+                .ToList();
+        }
 
-    public Word Create(Word word)
-    {
-        _context.Words.Add(word);
-        _context.SaveChanges();
-        return word;
+        public Word GetById(int id)
+        {
+            var entity = _context.Words.FirstOrDefault(word => word.Id == id);
+            return entity != null ? WordEntity.ToWord(entity) : null;
+        }
+
+        public List<Word> GetRandom(int count)
+        {
+            var maxId = _context.Words.Max(w => w.Id);
+            var randomWords = new List<Word>();
+            var random = new Random();
+
+            while (randomWords.Count < count)
+            {
+                var randomId = random.Next(1, maxId + 1);
+                
+                var randomEntity = _context.Words.Find(randomId);
+                
+                if (randomEntity != null)
+                {
+                    randomWords.Add(WordEntity.ToWord(randomEntity));
+                }
+            }
+            return randomWords;
+        }
+
+        public Word Create(Word word)
+        {
+            var entity = WordEntity.FromWord(word);
+            _context.Words.Add(entity);
+            _context.SaveChanges();
+            return WordEntity.ToWord(entity);
+        }
     }
 }

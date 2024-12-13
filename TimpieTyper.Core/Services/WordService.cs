@@ -1,4 +1,4 @@
-using TimpieTyper.Core.Entities;
+using TimpieTyper.Core.Domain;
 using TimpieTyper.Core.Interfaces;
 
 namespace TimpieTyper.Core.Services;

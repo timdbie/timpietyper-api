@@ -42,7 +42,7 @@ public class WordController : ControllerBase
     [HttpPost]
     public IActionResult Post(CreateWordDto createWordDto)
     {
-        var word = createWordDto.ToEntity();
+        var word = CreateWordDto.ToWord(createWordDto);
         
         var createdWord = _wordService.Create(word);
         
